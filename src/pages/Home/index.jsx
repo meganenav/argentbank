@@ -1,6 +1,6 @@
-import { useEffect } from 'react'
-import Hero from '../../components/Home/Hero'
-import Features from '../../components/Home/Features'
+import { useEffect } from "react"
+import Hero from "../../components/Home/Hero"
+import Features from "../../components/Home/Features"
 
 export default function Home() {
 	useEffect(() => 

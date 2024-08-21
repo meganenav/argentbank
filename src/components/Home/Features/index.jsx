@@ -1,7 +1,7 @@
-import Feature from '../Feature'
-import chatIcon from '../../../img/icon-chat.png'
-import moneyIcon from '../../../img/icon-money.png'
-import securityIcon from '../../../img/icon-security.png'
+import Feature from "../Feature"
+import chatIcon from "../../../img/icon-chat.png"
+import moneyIcon from "../../../img/icon-money.png"
+import securityIcon from "../../../img/icon-security.png"
 
 export default function Features() {
 
