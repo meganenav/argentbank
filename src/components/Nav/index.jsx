@@ -1,10 +1,11 @@
 import { NavLink } from "react-router-dom"
-import { useLocation } from "react-router-dom"
-import { logout } from "../../services/auth"
+import { useAuth } from "../../services/auth"
+import { useSelector } from "react-redux"
 import logo from "../../img/argentBankLogo.png"
 
 export default function Nav() {
-	let location = useLocation()
+	const firstName = useSelector((state) => state.user.firstName)
+	const { logout } = useAuth()
 
 	return (
 		<nav className="main-nav">
@@ -16,14 +17,12 @@ export default function Nav() {
 			/>
 			<h1 className="sr-only">Argent Bank</h1>
 			</a>
-			<div>
-				{ location.pathname !== "/profile" &&
-					<a className="main-nav-item" href="/login">
-						<i className="fa fa-user-circle"></i>
-						Sign In
-					</a>
-				}
-				{ location.pathname === "/profile" &&
+			<div>	
+				<a className="main-nav-item" href="/login">
+					<i className="fa fa-user-circle"></i>
+					{ firstName ? firstName : "Sign In" }
+				</a>
+				{ firstName &&
 					<NavLink to="/" className="main-nav-item" onClick={logout}>
 						<i className="fa fa-sign-out"></i>
 						Sign Out

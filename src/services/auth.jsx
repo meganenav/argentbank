@@ -1,45 +1,54 @@
 import { useContext, createContext, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { postData } from "./login"
+import { useDispatch } from "react-redux"
+import { resetStore } from "../redux/userSlice"
 
 const AuthContext = createContext()
 
-const AuthProvider = ({ children }) => {
+export default function AuthProvider({ children }) {
   const [user, setUser] = useState(null)
   const [token, setToken] = useState(localStorage.getItem("site") || "")
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
-      const login = async (username, password) => {
-        const response = await postData({ username, password })
-        console.log(response)
-        if (response.status === 200) {
-          setUser(true)
-          setToken(response.body.token)
-          localStorage.setItem("site", response.body.token)
-          console.log("test", localStorage)
-          navigate("/profile")
-          return true
-        } else {
-          console.log('Login failed')
-          navigate("/login")
-          return false
-        }
+  const login = async (username, password) => {
+    try {
+      const response = await postData({ username, password })
+
+      if (response.status === 200) {
+        setUser(true)
+        setToken(response.body.token)
+        localStorage.setItem("site", response.body.token)
+
+        navigate("/profile")
+        return true
+      } else {
+        console.log("Login failed")
+        navigate("/login")
+        return false
       }
-    
-      return (
-        <AuthContext.Provider value={{ token, user, login }}>
-          {children}
-        </AuthContext.Provider>
-      )
+    } catch (error) {
+      console.error("An error occurred during login:", error)
+      navigate("/login")
+      return false
     }
-    
-    export default AuthProvider
-    
-    export const useAuth = () => {
-      return useContext(AuthContext)
-    }
+  }
 
-    export const logout = () => {
-      localStorage.removeItem("site")
-      localStorage.removeItem("authenticated")
-    }
+  const logout = () => {
+    localStorage.removeItem("site")
+    localStorage.removeItem("authenticated")
+    dispatch(resetStore())
+    setUser(null)
+    setToken("")
+    navigate("/login")
+  }
+
+  return (
+    <AuthContext.Provider value={{ token, user, login, logout }}>
+      {children}
+    </AuthContext.Provider>
+  )
+}
+
+export const useAuth = () => useContext(AuthContext)

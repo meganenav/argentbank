@@ -11,6 +11,24 @@
 	}
 }
 
+.hidden-element {
+	display: none;
+}
+
+.edit-user {
+	display: block;
+}
+
+.form-update {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+
+	button {
+		width: 100px;
+	}
+}
+
 .account {
 	display: flex;
 	justify-content: space-between;

@@ -2,8 +2,8 @@ import { useEffect, useState } from "react"
 import { useAuth } from "../../services/auth.jsx"
 
 export default function SignIn() {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+  const [username, setUsername] = useState("")
+  const [password, setPassword] = useState("")
   const { login } = useAuth()
 
   useEffect(() => {
