@@ -6,34 +6,46 @@ import { useDispatch, useSelector } from "react-redux"
 import { setFirstName, setLastName } from "../../redux/userSlice.js"
 
 export default function User() {
-  const [token, setToken] = useState('')
+  //Token state initialization
+  const [token, setToken] = useState("")
 
+  //Allows to use actions from the store
   const dispatch = useDispatch()
-
+  
+  //Stored name initialization if found in the store
   const storedFirstName = useSelector((state) => state.user.firstName)
   const storedLastName = useSelector((state) => state.user.lastName)
 
   useEffect(() => {
-    document.title = "Argent Bank - Compte utilisateur"
-    setToken(localStorage.site)
+    //Token assignment value from the local storage
+    setToken(localStorage.getItem("site"))
+  }, [])
 
+  useEffect(() => {
     const fetchUser = async () => {
+      //If the name is found in the store
       if (storedFirstName && storedLastName) {
         return
       }
       
+      //If the token is not found
       if (!token) return
 
+      //If the name is not found in the store, call the API with token in parameter
       try {
         const response = await getUser(token)
-        if (response && response.body) {
-          dispatch(setFirstName(response.body.firstName))
-          dispatch(setLastName(response.body.lastName))
+        /*
+          If we get a response, value assignment in the store with the actions setFirstName and setLastName.
+          Values from the data adapter.
+        */
+        if (response) {
+          dispatch(setFirstName(response.firstName))
+          dispatch(setLastName(response.lastName))
         } else {
-          console.error('Le corps de la réponse est undefined ou null')
+          console.error("Response is undefined or null")
         }
       } catch (error) {
-        console.error('Erreur lors de la récupération de l\'utilisateur:', error)
+        console.error("Error when the user retrieval:", error)
       }
     }
 

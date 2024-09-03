@@ -6,6 +6,7 @@ import { Provider } from "react-redux"
 import createStore from "./app/store"
 import { PersistGate } from "redux-persist/integration/react"
 
+//Provider for the store and data persistence implementation
 const root = ReactDOM.createRoot(document.getElementById('root'))
 const { store, persistor } = createStore()
 root.render(

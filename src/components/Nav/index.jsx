@@ -4,9 +4,11 @@ import { useSelector } from "react-redux"
 import logo from "../../img/argentBankLogo.png"
 
 export default function Nav() {
+	//Call the first name from the store in order to display it
 	const firstName = useSelector((state) => state.user.firstName)
 	const { logout } = useAuth()
 
+	//Conditional display if the user is logged in or not
 	return (
 		<nav className="main-nav">
 			<a className="main-nav-logo" href="/">

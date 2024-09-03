@@ -9,7 +9,7 @@ import PrivateRoute from "../PrivateRoute"
 import AuthRoute from "../AuthRoute"
 import AuthProvider from "../../services/auth"
 
-//Création du routeur pour la page d'accueil permettant de personnaliser l'URL avec un id passé en paramètre
+//Creation of the router with authentication and private routes
 export default function Routing() {
   return (
     <Router>

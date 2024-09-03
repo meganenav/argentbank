@@ -4,14 +4,19 @@ import { useDispatch } from "react-redux"
 import { setFirstName, setLastName } from "../../../redux/userSlice"
 
 export default function Header(props) {
+    //States variables initialization
     const [isActive, setIsActive] = useState(false)
     const [token, setToken] = useState("")
-    const [newFirstName, setNewFirstName] = useState('')
-    const [newLastName, setNewLastName] = useState('')
+    const [newFirstName, setNewFirstName] = useState("")
+    const [newLastName, setNewLastName] = useState("")
+
+    //Allows to use actions from the store
     const dispatch = useDispatch()
     
+    //Form submit with name update
     const handleSubmit = async (e) => {
         e.preventDefault()
+        //Call API with token and new name in order to save the new name in the store
         const success = await update(token, newFirstName, newLastName)
         dispatch(setFirstName(newFirstName))
         dispatch(setLastName(newLastName))
@@ -20,10 +25,12 @@ export default function Header(props) {
         }
     }
 
+    //Cancellation to remove the form when clicking on the cancel button
     const handleCancel = () => {
         setIsActive(false)
     }
 
+    //Value assignment for the token with the localstorage
     useEffect(() => {
         setToken(localStorage.site)
     }, [])

@@ -1,5 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit"
 
+/*
+  Implementation of the initial state and reducers.
+  Reducers can handle first name and last name states and allows to reset store.
+*/
 const userSlice = createSlice({
   name: "user",
   initialState: {

@@ -2,16 +2,21 @@ import { useEffect, useState } from "react"
 import { useAuth } from "../../services/auth.jsx"
 
 export default function SignIn() {
+  //States initialization
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
+
+  //Call login function
   const { login } = useAuth()
 
   useEffect(() => {
     document.title = "Argent Bank - Sign in"
   }, [])
 
+  //Submit login form
   const handleSubmit = async (e) => {
     e.preventDefault()
+    //Try to login with username and password with API call
     const success = await login(username, password)
     if (success) {
       console.log("Login successful")

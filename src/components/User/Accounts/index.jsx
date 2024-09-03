@@ -22,6 +22,7 @@ const dataArray =
 	}
 ]
 export default function Accounts() {
+	//Iteration on the data array and call of the Account component
     const dataAccounts = dataArray.map(data =>
         <Account key={ data.index } title={ data.title } amount={data.amount} description={ data.description } />
     )

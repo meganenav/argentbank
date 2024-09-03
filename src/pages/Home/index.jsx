@@ -7,6 +7,7 @@ export default function Home() {
         { document.title="Argent Bank" }
     )
 
+	//Call the Hero and Features components
 	return (
 		<main>
 			<Hero />
