@@ -5,6 +5,7 @@ import Nav from "../../components/Nav"
 import SignIn from "../../pages/SignIn/"
 import Home from "../../pages/Home/"
 import User from "../../pages/User/"
+import Error from "../Error"
 import PrivateRoute from "../PrivateRoute"
 import AuthRoute from "../AuthRoute"
 import AuthProvider from "../../services/auth"
@@ -23,7 +24,7 @@ export default function Routing() {
           <Route element={<PrivateRoute />}>
             <Route path="/profile" element={<User />} />
           </Route>
-          <Route path="*" element={<Home />} />
+          <Route path="*" element={<Error />} />
         </Routes>
       </AuthProvider>
     </Router>
