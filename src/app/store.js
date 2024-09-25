@@ -13,9 +13,9 @@ import {
 import storage from "redux-persist/lib/storage"
 import { combineReducers } from "redux"
 
-//Persistence configuration
+//Persistence configuration, unique key in order to have a unique store
 const persistConfig = {
-  key: "root",
+  key: "ArgentBankApp",
   storage,
 }
 
